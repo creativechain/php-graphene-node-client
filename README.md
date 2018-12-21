@@ -37,8 +37,7 @@ $commandQuery = new CommandQueryData();
 $data = [
     [
         'limit'       => $limit,
-        'select_tags' => ['golos'], // for GOLOS
-        'tag'         => 'steemit', // for CREA     
+        'tag'         => 'crea', // for CREA     
     ]
 ];
 $commandQuery->setParams($data);
