@@ -28,8 +28,8 @@ install extensions
 use GrapheneNodeClient\Commands\CommandQueryData;
 use GrapheneNodeClient\Commands\Commands;
 use GrapheneNodeClient\Commands\Single\GetDiscussionsByCreatedCommand;
-use GrapheneNodeClient\Connectors\WebSocket\GolosWSConnector;
-use GrapheneNodeClient\Connectors\WebSocket\SteemitWSConnector;
+use GrapheneNodeClient\Connectors\WebSocket\CreaWSConnector;
+use GrapheneNodeClient\Connectors\WebSocket\CreaWSConnector;
 
 
 //Set params for query
@@ -38,7 +38,7 @@ $data = [
     [
         'limit'       => $limit,
         'select_tags' => ['golos'], // for GOLOS
-        'tag'         => 'steemit', // for STEEMIT     
+        'tag'         => 'steemit', // for CREA     
     ]
 ];
 $commandQuery->setParams($data);
@@ -51,13 +51,13 @@ $commandQuery->setParamByKey('0:tag', $tag);
 
 
 //and use single command
-$command = new GetDiscussionsByCreatedCommand(new GolosWSConnector());
+$command = new GetDiscussionsByCreatedCommand(new CreaWSConnector());
 $golosPosts = $command->execute(
     $commandQuery
 );
 
 //or commands aggregator class
-$commands = new Commands(new GolosWSConnector());
+$commands = new Commands(new CreaWSConnector());
 $golosPosts = $commands->get_discussions_by_created()
     ->execute(
        $commandQuery
@@ -80,20 +80,20 @@ $golosPosts = $commands->get_discussions_by_created()
   
   
 //single command  
-$command = new GetDiscussionsByCreatedCommand(new SteemitWSConnector());
+$command = new GetDiscussionsByCreatedCommand(new CreaWSConnector());
 $steemitPosts = $command->execute(
     $commandQuery,
     'result',
-    SteemitWSConnector::ANSWER_FORMAT_ARRAY // or SteemitWSConnector::ANSWER_FORMAT_OBJECT
+    CreaWSConnector::ANSWER_FORMAT_ARRAY // or CreaWSConnector::ANSWER_FORMAT_OBJECT
 );
 
 //or commands aggregator class
-$commands = new Commands(new GolosWSConnector());
+$commands = new Commands(new CreaWSConnector());
 $golosPosts = $commands->get_discussions_by_created()
     ->execute(
         $commandQuery,
         'result',
-        SteemitWSConnector::ANSWER_FORMAT_ARRAY // or SteemitWSConnector::ANSWER_FORMAT_OBJECT
+        CreaWSConnector::ANSWER_FORMAT_ARRAY // or CreaWSConnector::ANSWER_FORMAT_OBJECT
 );
 
 
@@ -159,11 +159,11 @@ namespace GrapheneNodeClient\Tools\ChainOperations
 <?php
 
 use GrapheneNodeClient\Tools\ChainOperations\OpVote;
-use GrapheneNodeClient\Connectors\Http\SteemitHttpConnector;
-use GrapheneNodeClient\Connectors\WebSocket\GolosWSConnector;
+use GrapheneNodeClient\Connectors\Http\CreaHttpConnector;
+use GrapheneNodeClient\Connectors\WebSocket\CreaWSConnector;
 
-$connector = new SteemitHttpConnector();
-//$connector = new GolosWSConnector();
+$connector = new CreaHttpConnector();
+//$connector = new CreaWSConnector();
 //$connector = new VizWSConnector();
 
 $answer = OpVote::doSynchronous(
@@ -197,10 +197,10 @@ namespace: GrapheneNodeClient\Connectors\WebSocket OR GrapheneNodeClient\Connect
 
 - VizWSConnector
 - VizHttpJsonRpcConnector
-- GolosWSConnector
-- GolosHttpJsonRpcConnector
-- SteemitWSConnector
-- SteemitHttpJsonRpcConnector
+- CreaWSConnector
+- CreaHttpJsonRpcConnector
+- CreaWSConnector
+- CreaHttpJsonRpcConnector
 
 List of available STEEM nodes are [here](https://www.steem.center/index.php?title=Public_Websocket_Servers)
 
@@ -213,7 +213,7 @@ use GrapheneNodeClient\Commands\CommandQueryData;
 use GrapheneNodeClient\Commands\Single\GetContentCommand;
 use GrapheneNodeClient\Connectors\InitConnector;
 
-$command = new GetContentCommand(InitConnector::getConnector(InitConnector::PLATFORM_STEEMIT));
+$command = new GetContentCommand(InitConnector::getConnector(InitConnector::PLATFORM_CREA));
 
 $commandQuery = new CommandQueryData();
 $commandQuery->setParamByKey('0', 'author');
@@ -294,7 +294,7 @@ namespace My\App\Commands;
 use GrapheneNodeClient\Commands\Single\CommandAbstract;
 use GrapheneNodeClient\Connectors\ConnectorInterface;
 
-class GolosWSConnector extends WSConnectorAbstract
+class CreaWSConnector extends WSConnectorAbstract
 {
     /**
      * @var string
@@ -333,7 +333,7 @@ class GolosWSConnector extends WSConnectorAbstract
 
 ## Creating Own Command
 
-You have to update $map properties in GolosApiMethods/SteemitApiMethods/VizApiMethods classes as shown below
+You have to update $map properties in CreaApiMethods/CreaApiMethods/VizApiMethods classes as shown below
 
 ```php
 <?php
@@ -341,7 +341,7 @@ You have to update $map properties in GolosApiMethods/SteemitApiMethods/VizApiMe
 
 namespace GrapheneNodeClient\Commands;
 
-class SteemitApiMethods
+class CreaApiMethods
 {
     //...
     //protected $projectApi = [ 'method_name' => [ 'apiName' => 'api_name', 'fields'=>['массив с полями из команды']]];
@@ -412,13 +412,13 @@ Sometimes you can't send transaction to blockchain because your account has not 
 ```php
 <?php
 
-use GrapheneNodeClient\Connectors\Http\SteemitHttpConnector;
+use GrapheneNodeClient\Connectors\Http\CreaHttpConnector;
 use GrapheneNodeClient\Commands\CommandQueryData;
 use GrapheneNodeClient\Tools\Bandwidth;
 use GrapheneNodeClient\Tools\Transaction;
 
 
-$connector = new SteemitHttpConnector();
+$connector = new CreaHttpConnector();
 /** @var CommandQueryData $tx */
 $tx = Transaction::init($connector, 'PT4M');
 $tx->setParamByKey(
@@ -471,11 +471,11 @@ if ($trxString * 10 + $bandwidth['used'] < $bandwidth['available']) {
 <?php
 
 use GrapheneNodeClient\Tools\Transaction;
-use GrapheneNodeClient\Connectors\Http\SteemitHttpConnector;
-use GrapheneNodeClient\Connectors\WebSocket\GolosWSConnector;
+use GrapheneNodeClient\Connectors\Http\CreaHttpConnector;
+use GrapheneNodeClient\Connectors\WebSocket\CreaWSConnector;
 
-$connector = new SteemitHttpConnector();
-//$connector = new GolosWSConnector();
+$connector = new CreaHttpConnector();
+//$connector = new CreaWSConnector();
 
 /** @var CommandQueryData $tx */
 $tx = Transaction::init($connector, 'PT4M');

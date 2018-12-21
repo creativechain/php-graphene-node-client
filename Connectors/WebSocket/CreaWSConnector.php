@@ -3,12 +3,12 @@
 namespace GrapheneNodeClient\Connectors\WebSocket;
 
 
-class SteemitWSConnector extends WSConnectorAbstract
+class CreaWSConnector extends WSConnectorAbstract
 {
     /**
      * @var string
      */
-    protected $platform = self::PLATFORM_STEEMIT;
+    protected $platform = self::PLATFORM_CREA;
 
     /**
      * wss or ws server

@@ -151,9 +151,9 @@ class Commands implements CommandInterface
 
         if (!isset(self::$queryDataMap[$platform])) {
             if ($platform === ConnectorInterface::PLATFORM_GOLOS) {
-                $api = GolosApiMethods::$map;
-            } elseif ($platform === ConnectorInterface::PLATFORM_STEEMIT) {
-                $api = SteemitApiMethods::$map;
+                $api = CreaApiMethods::$map;
+            } elseif ($platform === ConnectorInterface::PLATFORM_CREA) {
+                $api = CreaApiMethods::$map;
             } elseif ($platform === ConnectorInterface::PLATFORM_VIZ) {
                 $api = VizApiMethods::$map;
             } elseif ($platform === ConnectorInterface::PLATFORM_WHALESHARES) {

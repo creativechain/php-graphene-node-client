@@ -4,9 +4,9 @@
 namespace GrapheneNodeClient\Connectors;
 
 
-use GrapheneNodeClient\Connectors\Http\SteemitHttpJsonRpcConnector;
+use GrapheneNodeClient\Connectors\Http\CreaHttpJsonRpcConnector;
 use GrapheneNodeClient\Connectors\Http\VizHttpJsonRpcConnector;
-use GrapheneNodeClient\Connectors\WebSocket\GolosWSConnector;
+use GrapheneNodeClient\Connectors\WebSocket\CreaWSConnector;
 
 class InitConnector
 {
@@ -16,7 +16,7 @@ class InitConnector
     protected static $connectors = [];
     protected static $platforms = [
         ConnectorInterface::PLATFORM_GOLOS,
-        ConnectorInterface::PLATFORM_STEEMIT
+        ConnectorInterface::PLATFORM_CREA
     ];
 
     public static function getConnector($platform)
@@ -28,9 +28,9 @@ class InitConnector
             if ($platform === ConnectorInterface::PLATFORM_VIZ) {
                 self::$connectors[$platform] = new VizHttpJsonRpcConnector();
             } elseif ($platform === ConnectorInterface::PLATFORM_GOLOS) {
-                self::$connectors[$platform] = new GolosWSConnector();
-            } elseif ($platform === ConnectorInterface::PLATFORM_STEEMIT) {
-                self::$connectors[$platform] = new SteemitHttpJsonRpcConnector();
+                self::$connectors[$platform] = new CreaWSConnector();
+            } elseif ($platform === ConnectorInterface::PLATFORM_CREA) {
+                self::$connectors[$platform] = new CreaHttpJsonRpcConnector();
             }
         }
 

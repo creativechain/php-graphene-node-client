@@ -15,7 +15,7 @@ use t3ran13\ByteBuffer\ByteBuffer;
 
 class Transaction
 {
-    const CHAIN_STEEM       = ConnectorInterface::PLATFORM_STEEMIT;
+    const CHAIN_STEEM       = ConnectorInterface::PLATFORM_CREA;
     const CHAIN_GOLOS       = ConnectorInterface::PLATFORM_GOLOS;
     const CHAIN_VIZ         = ConnectorInterface::PLATFORM_VIZ;
     const CHAIN_WHALESHARES = ConnectorInterface::PLATFORM_WHALESHARES;

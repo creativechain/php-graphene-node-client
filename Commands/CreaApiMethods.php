@@ -4,7 +4,7 @@
 namespace GrapheneNodeClient\Commands;
 
 
-class VizApiMethods
+class CreaApiMethods
 {
     /**
      *  [ 'method_name' => [ 'apiName' => 'api_name', 'fields'=>['массив с полями из команды']]];
@@ -29,7 +29,7 @@ class VizApiMethods
             'fields'  => []
         ],
         'get_account_history'                   => [
-            'apiName' => 'account_history',
+            'apiName' => 'database_api',
             'fields'  => [
                 '0' => ['string'], //authors
                 '1' => ['integer'], //from
@@ -37,24 +37,28 @@ class VizApiMethods
             ]
         ],
         'get_account_votes'                     => [
-            'apiName' => 'social_network',
+            'apiName' => 'database_api',
             'fields'  => [
                 '0' => ['string'], //account name
-                '1' => ['integer'], //from as offset
-                '2' => ['integer'] //voteLimit by default 10 000
             ]
         ],
         'get_active_votes'                      => [
-            'apiName' => 'social_network',
+            'apiName' => 'database_api',
             'fields'  => [
                 '0' => ['string'], //author
                 '1' => ['string'], //permlink
-                '2' => ['nullOrInteger'] //voteLimit by default 10 000
             ]
         ],
         'get_active_witnesses'                  => [
-            'apiName' => 'witness_api',
+            'apiName' => 'database_api',
             'fields'  => [
+            ]
+        ],
+        'get_content'                           => [
+            'apiName' => 'database_api',
+            'fields'  => [
+                '0' => ['string'], //author
+                '1' => ['string'], //permlink
             ]
         ],
         'get_block_header'                      => [
@@ -68,81 +72,61 @@ class VizApiMethods
             'fields'  => [
             ]
         ],
-        'get_content'                           => [
-            'apiName' => 'social_network',
+        'get_content_replies'                   => [
+            'apiName' => 'database_api',
             'fields'  => [
                 '0' => ['string'], //author
                 '1' => ['string'], //permlink
-                '2' => ['nullOrInteger'] //voteLimit by default 10 000
             ]
         ],
-        'get_content_replies'                   => [
-            'apiName' => 'social_network',
+        'get_current_median_history_price'      => [
+            'apiName' => 'database_api',
             'fields'  => [
-                '0' => ['string'], //author
-                '1' => ['string'], //permlink
-                '2' => ['nullOrInteger'] //voteLimit by default 10 000
             ]
         ],
         'get_discussions_by_author_before_date' => [
-            'apiName' => 'tags',
+            'apiName' => 'database_api',
             'fields'  => [
                 '0' => ['string'], //'author',
                 '1' => ['string'], //'start_permlink' for pagination,
                 '2' => ['string'], //'before_date'
-                '3' => ['integer'] //'limit'
+                '3' => ['integer'], //'limit'
             ]
         ],
         'get_discussions_by_blog'               => [
-            'apiName' => 'tags',
+            'apiName' => 'database_api',
             'fields'  => [
-                '*:limit'            => ['integer'], //the discussions return amount top limit
-                '*:select_tags:*'    => ['nullOrString'], //list of tags to include, posts without these tags are filtered
-                '*:select_authors:*' => ['nullOrString'], //list of authors to select
-                '*:truncate_body'    => ['nullOrInteger'], //the amount of bytes of the post body to return, 0 for all
-                '*:start_author'     => ['nullOrString'], //the author of discussion to start searching from
-                '*:start_permlink'   => ['nullOrString'], //the permlink of discussion to start searching from
-                '*:parent_author'    => ['nullOrString'], //the author of parent discussion
-                '*:parent_permlink'  => ['nullOrString'] //the permlink of parent discussion
+                '*:tag'            => ['string'], //'author',
+                '*:limit'          => ['integer'], //'limit'
+                '*:start_author'   => ['nullOrString'], //'start_author' for pagination,
+                '*:start_permlink' => ['nullOrString'] //'start_permlink' for pagination,
             ]
         ],
         'get_discussions_by_created'            => [
-            'apiName' => 'tags',
+            'apiName' => 'database_api',
             'fields'  => [
-                '*:limit'            => ['integer'], //the discussions return amount top limit
-                '*:select_tags:*'    => ['nullOrString'], //list of tags to include, posts without these tags are filtered
-                '*:select_authors:*' => ['nullOrString'], //list of authors to select
-                '*:truncate_body'    => ['nullOrInteger'], //the amount of bytes of the post body to return, 0 for all
-                '*:start_author'     => ['nullOrString'], //the author of discussion to start searching from
-                '*:start_permlink'   => ['nullOrString'], //the permlink of discussion to start searching from
-                '*:parent_author'    => ['nullOrString'], //the author of parent discussion
-                '*:parent_permlink'  => ['nullOrString'] //the permlink of parent discussion
-            ],
+                '*:tag'            => ['nullOrString'], //'author',
+                '*:limit'          => ['integer'], //'limit'
+                '*:start_author'   => ['nullOrString'], //'start_author' for pagination,
+                '*:start_permlink' => ['nullOrString'] //'start_permlink' for pagination,
+            ]
         ],
         'get_discussions_by_feed'               => [
-            'apiName' => 'tags',
+            'apiName' => 'database_api',
             'fields'  => [
-                '*:limit'            => ['integer'], //the discussions return amount top limit
-                '*:select_tags:*'    => ['nullOrString'], //list of tags to include, posts without these tags are filtered
-                '*:select_authors:*' => ['nullOrString'], //list of authors to select
-                '*:truncate_body'    => ['nullOrInteger'], //the amount of bytes of the post body to return, 0 for all
-                '*:start_author'     => ['nullOrString'], //the author of discussion to start searching from
-                '*:start_permlink'   => ['nullOrString'], //the permlink of discussion to start searching from
-                '*:parent_author'    => ['nullOrString'], //the author of parent discussion
-                '*:parent_permlink'  => ['nullOrString'] //the permlink of parent discussion
+                '*:tag'            => ['string'], //'author',
+                '*:limit'          => ['integer'], //'limit'
+                '*:start_author'   => ['nullOrString'], //'start_author' for pagination,
+                '*:start_permlink' => ['nullOrString'] //'start_permlink' for pagination,
             ]
         ],
         'get_discussions_by_trending'           => [
-            'apiName' => 'tags',
+            'apiName' => 'database_api',
             'fields'  => [
-                '*:limit'            => ['integer'], //the discussions return amount top limit
-                '*:select_tags:*'    => ['nullOrString'], //list of tags to include, posts without these tags are filtered
-                '*:select_authors:*' => ['nullOrString'], //list of authors to select
-                '*:truncate_body'    => ['nullOrInteger'], //the amount of bytes of the post body to return, 0 for all
-                '*:start_author'     => ['nullOrString'], //the author of discussion to start searching from
-                '*:start_permlink'   => ['nullOrString'], //the permlink of discussion to start searching from
-                '*:parent_author'    => ['nullOrString'], //the author of parent discussion
-                '*:parent_permlink'  => ['nullOrString'] //the permlink of parent discussion
+                '*:tag'            => ['nullOrString'], //'author',
+                '*:limit'          => ['integer'], //'limit'
+                '*:start_author'   => ['nullOrString'], //'start_author' for pagination,
+                '*:start_permlink' => ['nullOrString'] //'start_permlink' for pagination,
             ]
         ],
         'get_dynamic_global_properties'         => [
@@ -151,33 +135,58 @@ class VizApiMethods
             ]
         ],
         'get_ops_in_block'                      => [
-            'apiName' => 'operation_history',
+            'apiName' => 'database_api',
             'fields'  => [
                 '0' => ['integer'], //blockNum
                 '1' => ['bool'], //onlyVirtual
             ]
         ],
+        'get_trending_categories'               => [
+            'apiName' => 'database_api',
+            'fields'  => [
+                '0' => ['nullOrString'], //after
+                '1' => ['integer'], //permlink
+            ]
+        ],
         'get_trending_tags'               => [
-            'apiName' => 'tags',
+            'apiName' => 'database_api',
             'fields'  => [
                 '0' => ['nullOrString'], //after
                 '1' => ['integer'], //permlink
             ]
         ],
         'get_witnesses_by_vote'                 => [
-            'apiName' => 'witness_api',
+            'apiName' => 'database_api',
             'fields'  => [
                 '0' => ['string'], //from accountName, can be empty string ''
                 '1' => ['integer'] //limit
             ]
         ],
         'get_followers'                         => [
-            'apiName' => 'follow',
+            'apiName' => 'follow_api',
             'fields'  => [
                 '0' => ['string'], //author
                 '1' => ['nullOrString'], //startFollower
                 '2' => ['string'], //followType //blog, ignore
                 '3' => ['integer'], //limit
+            ]
+        ],
+        'login'                                 => [
+            'apiName' => 'login_api',
+            'fields'  => [
+                0 => ['string'],
+                1 => ['string']
+            ]
+        ],
+        'get_version'                           => [
+            'apiName' => 'login_api',
+            'fields'  => [
+            ]
+        ],
+        'get_api_by_name'                       => [
+            'apiName' => 'login_api',
+            'fields'  => [
+                '0' => ['string'], //'api_name',for example follow_api, database_api, login_api and ect.
             ]
         ],
         'broadcast_transaction'                 => [

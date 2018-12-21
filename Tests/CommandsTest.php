@@ -8,10 +8,9 @@
 
 use GrapheneNodeClient\Commands\Commands;
 use GrapheneNodeClient\Commands\CommandQueryData;
-use GrapheneNodeClient\Connectors\Http\SteemitHttpConnector;
-use GrapheneNodeClient\Connectors\Http\SteemitHttpJsonRpcConnector;
-use GrapheneNodeClient\Connectors\WebSocket\GolosWSConnector;
-use GrapheneNodeClient\Connectors\WebSocket\SteemitWSConnector;
+use GrapheneNodeClient\Connectors\Http\CreaHttpConnector;
+use GrapheneNodeClient\Connectors\Http\CreaHttpJsonRpcConnector;
+use GrapheneNodeClient\Connectors\WebSocket\CreaWSConnector;
 use GrapheneNodeClient\Tools\ChainOperations\OpVote;
 use PHPUnit\Framework\TestCase;
 
@@ -21,8 +20,8 @@ class CommandsTest extends TestCase
 {
     public function connectorsDataProvider(){
         return [
-            [new SteemitHttpJsonRpcConnector(),'steem'],
-            [new GolosWSConnector(),'golos']
+            [new CreaHttpJsonRpcConnector(),'steem'],
+            [new CreaWSConnector(),'golos']
         ];
     }
 
