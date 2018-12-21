@@ -1,14 +1,14 @@
 # php-graphene-node-client
-PHP client for connection to [VIZ](https://github.com/viz-world)/[STEEM](https://github.com/steemit)/[GOLOS](https://github.com/goloschain)/[WHALESHARES](https://gitlab.com/beyondbitcoin) node
+PHP client for connection to [CREA](https://gitlab.com/creativechain) node
 
 
 ## Install Via Composer
 #### For readonly, without broadcast
 ```
-composer require t3ran13/php-graphene-node-client
+composer require crea/php-graphene-node-client
 ```
 #### with broadcast (sending transactions to blockchain)
-\(details are [here](https://golos.io/ru--otkrytyij-kod/@php-node-client/podklyuchenie-secp256k1-php-k-php-dockerfile)\) and actual dockerfile and requests examples see in branch ["debug"]()https://github.com/t3ran13/php-graphene-node-client/tree/debug)
+\(details are [here](https://golos.io/ru--otkrytyij-kod/@php-node-client/podklyuchenie-secp256k1-php-k-php-dockerfile)\) and actual dockerfile and requests examples see in branch ["debug"](https://github.com/crea/php-graphene-node-client/tree/debug)
 
 install components
 - automake
@@ -152,8 +152,7 @@ namespace GrapheneNodeClient\Tools\ChainOperations
 
 - vote
 - transfer
-- comment // steem or golos
-- content // only viz
+- comment // crea
 
 ```php
 <?php
@@ -195,14 +194,8 @@ $answer = OpVote::doSynchronous(
 
 namespace: GrapheneNodeClient\Connectors\WebSocket OR GrapheneNodeClient\Connectors\Http;
 
-- VizWSConnector
-- VizHttpJsonRpcConnector
 - CreaWSConnector
 - CreaHttpJsonRpcConnector
-- CreaWSConnector
-- CreaHttpJsonRpcConnector
-
-List of available STEEM nodes are [here](https://www.steem.center/index.php?title=Public_Websocket_Servers)
 
 
 #### Switching between connectors 
@@ -299,7 +292,7 @@ class CreaWSConnector extends WSConnectorAbstract
     /**
      * @var string
      */
-    protected $platform = self::PLATFORM_GOLOS;
+    protected $platform = self::PLATFORM_CREA;
 
     /**
      * waiting answer from Node during $wsTimeoutSeconds seconds
@@ -321,7 +314,7 @@ class CreaWSConnector extends WSConnectorAbstract
      *
      * @var string|array
      */
-    protected $nodeURL = ['wss://ws.golos.io', 'wss://api.golos.cf'];
+    protected $nodeURL = ['wss://ws.creary.net'];
 }
 
 
@@ -333,7 +326,7 @@ class CreaWSConnector extends WSConnectorAbstract
 
 ## Creating Own Command
 
-You have to update $map properties in CreaApiMethods/CreaApiMethods/VizApiMethods classes as shown below
+You have to update $map properties in CreaApiMethods classes as shown below
 
 ```php
 <?php
