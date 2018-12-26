@@ -13,7 +13,7 @@ class CreaApiMethods
      */
     public static $map = [
         'get_block'                             => [
-            'apiName' => 'database_api',
+            'apiName' => 'condenser_api',
             'fields'  => [
                 '0' => ['integer'], //block_id
             ]

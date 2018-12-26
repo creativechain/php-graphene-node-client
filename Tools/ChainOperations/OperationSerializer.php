@@ -12,7 +12,10 @@ class OperationSerializer
     const TYPE_SET_STRING       = 'set_string';
     const TYPE_STRING           = 'string';
     const TYPE_INT16            = 'int16';
+    const TYPE_INT32            = 'int32';
     const TYPE_ASSET            = 'asset';
+    const TYPE_AUTHORITY        = 'authority';
+    const TYPE_MAP              = 'map';
 
     const OPERATIONS_FIELDS_TYPES = [
         ChainOperations::OPERATION_VOTE        => [
@@ -52,6 +55,16 @@ class OperationSerializer
             'required_posting_auths' => self::TYPE_SET_STRING,
             'id'                     => self::TYPE_STRING,
             'json'                   => self::TYPE_STRING
+        ],
+        ChainOperations::OPERATION_ACCOUNT_CREATE => [
+            'fee' => self::TYPE_ASSET,
+            'creator' => self::TYPE_STRING,
+            'new_account_name' => self::TYPE_STRING,
+            'owner' => self::TYPE_AUTHORITY,
+            'active' => self::TYPE_AUTHORITY,
+            'posting' => self::TYPE_AUTHORITY,
+            'memo_key' => self::TYPE_AUTHORITY,
+            'json_metadata' => self::TYPE_STRING,
         ]
     ];
 
@@ -148,6 +161,8 @@ class OperationSerializer
             }
         } elseif ($type === self::TYPE_INT16) {
             $byteBuffer->writeInt16LE($value);
+        } elseif ($type === self::TYPE_INT32) {
+            $byteBuffer->writeInt32LE($value);
         } elseif ($type === self::TYPE_ASSET) {
             list($amount, $symbol) = explode(' ', $value);
 
@@ -179,6 +194,13 @@ class OperationSerializer
         } elseif ($type === self::TYPE_BENEFICIARY) {
             self::serializeType(self::TYPE_STRING, $value['account'], $byteBuffer);
             self::serializeType(self::TYPE_INT16, $value['weight'], $byteBuffer);
+        } elseif ($type === self::TYPE_AUTHORITY) {
+            self::serializeType(self::TYPE_INT32, $value['weight_threshold'], $byteBuffer);
+
+            self::serializeType(self::TYPE_MAP, $value['account_auths'], $byteBuffer);
+            self::serializeType(self::TYPE_MAP, $value['key_auths'], $byteBuffer);
+        } elseif ($type === self::TYPE_MAP) {
+            $length = count($value);
         }
 
         return $byteBuffer;

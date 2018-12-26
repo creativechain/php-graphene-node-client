@@ -218,12 +218,8 @@ abstract class HttpJsonRpcConnectorAbstract implements ConnectorInterface
         $requestData = [
             'jsonrpc' => '2.0',
             'id'      => $requestId,
-            'method'  => 'call',
-            'params'  => [
-                $apiName,
-                $data['method'],
-                $data['params']
-            ]
+            'method'  => $apiName . '.' . $data['method'],
+            'params'  => empty($data['params']) ? new \stdClass() : $data['params'],
         ];
         try {
             $curlOptions = [];
