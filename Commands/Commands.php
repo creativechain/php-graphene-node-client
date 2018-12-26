@@ -150,14 +150,8 @@ class Commands implements CommandInterface
         $platform = $this->connector->getPlatform();
 
         if (!isset(self::$queryDataMap[$platform])) {
-            if ($platform === ConnectorInterface::PLATFORM_GOLOS) {
+            if ($platform === ConnectorInterface::PLATFORM_CREA) {
                 $api = CreaApiMethods::$map;
-            } elseif ($platform === ConnectorInterface::PLATFORM_CREA) {
-                $api = CreaApiMethods::$map;
-            } elseif ($platform === ConnectorInterface::PLATFORM_VIZ) {
-                $api = VizApiMethods::$map;
-            } elseif ($platform === ConnectorInterface::PLATFORM_WHALESHARES) {
-                $api = WhalesharesApiMethods::$map;
             } else {
                 throw new \Exception('There is no api');
             }

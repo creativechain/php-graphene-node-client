@@ -9,6 +9,7 @@ class ChainOperations
     const OPERATION_COMMENT     = 'comment';
     const OPERATION_CONTENT     = 'content';
     const OPERATION_TRANSFER    = 'transfer';
+    const OPERATION_ACCOUNT_CREATE = 'account_create';
     const OPERATION_CUSTOM_JSON = 'custom_json';
 
     const OPERATIONS_IDS = [
