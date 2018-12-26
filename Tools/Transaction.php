@@ -15,15 +15,9 @@ use t3ran13\ByteBuffer\ByteBuffer;
 
 class Transaction
 {
-    const CHAIN_STEEM       = ConnectorInterface::PLATFORM_CREA;
-    const CHAIN_GOLOS       = ConnectorInterface::PLATFORM_GOLOS;
-    const CHAIN_VIZ         = ConnectorInterface::PLATFORM_VIZ;
-    const CHAIN_WHALESHARES = ConnectorInterface::PLATFORM_WHALESHARES;
+    const CHAIN_CREA       = ConnectorInterface::PLATFORM_CREA;
     const CHAIN_ID          = [
-        self::CHAIN_GOLOS       => '782a3039b478c839e4cb0c941ff4eaeb7df40bdd68bd441afd444b9da763de12',
-        self::CHAIN_STEEM       => '0000000000000000000000000000000000000000000000000000000000000000',
-        self::CHAIN_VIZ         => '2040effda178d4fffff5eab7a915d4019879f5205cc5392e4bcced2b6edda0cd',
-        self::CHAIN_WHALESHARES => 'de999ada2ff7ed3d3d580381f229b40b5a0261aec48eb830e540080817b72866'
+        self::CHAIN_CREA       => '0000000000000000000000000000000000000000000000000000000000000000',
     ];
 
     public static function getChainId($chainName)

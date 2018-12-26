@@ -6,8 +6,8 @@ namespace GrapheneNodeClient\Tools\ChainOperations;
 class ChainOperations
 {
     const OPERATION_VOTE        = 'vote';
-    const OPERATION_COMMENT     = 'comment'; //STEEM/GOLOS/whaleshares
-    const OPERATION_CONTENT     = 'content'; //only for VIZ
+    const OPERATION_COMMENT     = 'comment';
+    const OPERATION_CONTENT     = 'content';
     const OPERATION_TRANSFER    = 'transfer';
     const OPERATION_CUSTOM_JSON = 'custom_json';
 

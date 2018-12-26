@@ -62,4 +62,21 @@ class Auth
 
         return $private_key;
     }
+
+    /**
+     * @param string $publicKey
+     * @param int $weightThreshold
+     * @return array
+     */
+    public static function publicToKeyAuth($publicKey, $weightThreshold = 1) {
+        return array(
+            'weight_threshold' => $weightThreshold,
+            'account_auth' => [],
+            'key_auths' => [
+                [
+                    $publicKey, 1
+                ]
+            ]
+        );
+    }
 }
