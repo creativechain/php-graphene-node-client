@@ -19,6 +19,6 @@ class CreaHttpJsonRpcConnector extends HttpJsonRpcConnectorAbstract
      * @var string
      */
     protected static $nodeURL = [
-        'https://node1.creary.net'
+        'https://nodes.creary.net'
     ];
 }
