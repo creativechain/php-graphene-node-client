@@ -235,13 +235,18 @@ abstract class HttpJsonRpcConnectorAbstract implements ConnectorInterface
             }
             $answer = json_decode($answerRaw['response'], self::ANSWER_FORMAT_ARRAY === $answerFormat);
 
-            if (isset($answer['error'])) {
-                throw new \Exception('got error in answer: ' . $answer['error']['code'] . ' ' . $answer['error']['message']);
-            }
+
             //check that answer has the same id or id from previous tries, else it is answer from other request
             if (self::ANSWER_FORMAT_ARRAY === $answerFormat) {
+                if (isset($answer['error'])) {
+                    throw new \Exception('got error in answer: ' . $answer['error']['code'] . ' ' . $answer['error']['message']);
+                }
                 $answerId = $answer['id'];
+
             } else { //if (self::ANSWER_FORMAT_OBJECT === $answerFormat) {
+                if (isset($answer->error)) {
+                    throw new \Exception('got error in answer: ' . $answer->error->code . ' ' . $answer->error->message);
+                }
                 $answerId = $answer->id;
             }
             if ($requestId - $answerId > ($try_number - 1)) {
