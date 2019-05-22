@@ -55,7 +55,7 @@ class CreaApiMethods
             ]
         ],
         'get_content'                           => [
-            'apiName' => 'database_api',
+            'apiName' => 'condenser_api',
             'fields'  => [
                 '0' => ['string'], //author
                 '1' => ['string'], //permlink
