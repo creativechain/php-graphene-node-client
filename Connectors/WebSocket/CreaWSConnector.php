@@ -19,5 +19,6 @@ class CreaWSConnector extends WSConnectorAbstract
      * @var string
      */
     protected static $nodeURL = [
+        'https://nodes.creary.net',
     ];
 }
