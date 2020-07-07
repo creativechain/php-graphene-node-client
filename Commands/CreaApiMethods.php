@@ -202,7 +202,7 @@ class CreaApiMethods
             ]
         ],
         'broadcast_transaction_synchronous'     => [
-            'apiName' => 'network_broadcast_api',
+            'apiName' => 'condenser_api',
             'fields'  => [
                 '0:ref_block_num'    => ['integer'],
                 '0:ref_block_prefix' => ['integer'],
